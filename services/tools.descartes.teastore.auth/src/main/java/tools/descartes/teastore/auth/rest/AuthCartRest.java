@@ -64,6 +64,11 @@ public class AuthCartRest {
     } catch (NotFoundException e) {
       return Response.status(404).build();
     }
+    
+    long time = System.currentTimeMillis();
+    while (System.currentTimeMillis() < time + 5) {
+    	// Do nothing for busy waiting
+    }
 
     for (OrderItem orderItem : blob.getOrderItems()) {
       if (orderItem.getProductId() == pid) {
