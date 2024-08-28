@@ -63,8 +63,3 @@ docker run --hostname=teastore-image-1 \
 	-v $MY_FOLDER/teastore-image:/kieker/logs/ -e "LOG_TO_FILE=true" -e "REGISTRY_HOST=$MY_IP" -e "REGISTRY_PORT=10000" -e "HOST_NAME=$MY_IP" -e "SERVICE_PORT=4444" -p 4444:8080 -d teastore-image
 docker run --hostname=teastore-webui-1 \
 	-v $MY_FOLDER/teastore-webui:/kieker/logs/ -e "LOG_TO_FILE=true" -e "REGISTRY_HOST=$MY_IP" -e "REGISTRY_PORT=10000" -e "HOST_NAME=$MY_IP" -e "SERVICE_PORT=8080" -p 8080:8080 -d teastore-webui
-
-waitForContainerStartup recommender 'org.apache.catalina.startup.Catalina.start Server startup in '
-
-database_id=$(docker ps | grep "teastore-db" | awk '{print $1}')
-waitForContainerStartup $database_id 'port: 3306'
