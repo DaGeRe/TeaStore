@@ -64,14 +64,10 @@ fi
 ssh -q $1 "exit"
 
 ssh $TEASTORE_RUNNER_IP "if [ ! -d TeaStore ]; then git clone https://github.com/DaGeRe/TeaStore.git; fi"
-ssh $TEASTORE_RUNNER_IP "cd TeaStore; git checkout kieker-debug; git pull"
+ssh $TEASTORE_RUNNER_IP "cd TeaStore; git checkout kieker-debug-subprocess; git pull"
 
 for NUMUSER in 1 2 4 8 16
 do
-	runOneExperiment "NO_INSTRUMENTATION" no_instrumentation_$NUMUSER.csv $NUMUSER
-	runOneExperiment "DEACTIVATED" deactivated_$NUMUSER.csv $NUMUSER
-	runOneExperiment "NOLOGGING" nologging_$NUMUSER.csv $NUMUSER
-	runOneExperiment " " aspectj_instrumentation_$NUMUSER.csv $NUMUSER
 	runOneExperiment "TCP" tcp_$NUMUSER.csv $NUMUSER
 	
 done
