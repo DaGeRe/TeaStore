@@ -44,10 +44,14 @@ public class ImageProviderEndpoint {
   @POST
   @Path("getProductImages")
   public Response getProductImages(HashMap<Long, String> images) {
-    return Response.ok()
+	long start = System.nanoTime();
+    Response response = Response.ok()
         .entity(ImageProvider.IP.getProductImages(images.entrySet().parallelStream().collect(
             Collectors.toMap(e -> e.getKey(), e -> ImageSize.parseImageSize(e.getValue())))))
         .build();
+    long duration = (System.nanoTime() - start) / 1000;
+    System.out.println("Duration: " + duration);
+	return response;
   }
 
   /**

@@ -20,12 +20,12 @@
           </elementProp>
           <elementProp name="num_user" elementType="Argument">
             <stringProp name="Argument.name">num_user</stringProp>
-            <stringProp name="Argument.value">2</stringProp>
+            <stringProp name="Argument.value">1</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
           <elementProp name="ramp_up" elementType="Argument">
             <stringProp name="Argument.name">ramp_up</stringProp>
-            <stringProp name="Argument.value">2</stringProp>
+            <stringProp name="Argument.value">0</stringProp>
             <stringProp name="Argument.metadata">=</stringProp>
           </elementProp>
         </collectionProp>
@@ -39,7 +39,7 @@
         <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
         <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
         <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Schleifen-Controller (Loop Controller)">
-          <stringProp name="LoopController.loops">10000</stringProp>
+          <stringProp name="LoopController.loops">10</stringProp>
           <boolProp name="LoopController.continue_forever">false</boolProp>
         </elementProp>
       </ThreadGroup>
