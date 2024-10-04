@@ -60,7 +60,7 @@ public final class ServiceLoadBalancer {
 
 	private BaseLoadBalancer loadBalancer;
     // retry handler that does not retry on same server, but on a different server
-    private final RetryHandler retryHandler = new DefaultLoadBalancerRetryHandler(0, 2, true);
+    private final RetryHandler retryHandler = new DefaultLoadBalancerRetryHandler(2, 2, true);
 
     private ReadWriteLock loadBalancerModificationLock = new ReentrantReadWriteLock();
 
