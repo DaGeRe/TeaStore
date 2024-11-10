@@ -108,7 +108,7 @@ function setupServer {
 	ssh -q $CONNECTION_IP "exit"
 
 	ssh $CONNECTION_IP "if [ ! -d TeaStore ]; then git clone https://github.com/DaGeRe/TeaStore.git; fi"
-	ssh $CONNECTION_IP "cd TeaStore; git checkout kieker-debug; git pull"
+	ssh $CONNECTION_IP "cd TeaStore; git checkout analyzeRequestSize; git pull"
 }
 
 set -e
@@ -144,7 +144,7 @@ do
 	for (( iteration=1; iteration<=$loops; iteration++ ))
 	do
 		start=$(date +%s%N)
-		for NUMUSER in 1 2 4 8
+		for NUMUSER in 1 16 64
 		do
 			runOneExperiment "NO_INSTRUMENTATION" no_instrumentation_$NUMUSER"_"$iteration.csv $NUMUSER $RECURSION_DEPTH ${@:2}
 			runOneExperiment "KIEKER_ASPECTJ_BINARY" kieker_aspectj_binary_$NUMUSER"_"$iteration.csv $NUMUSER $RECURSION_DEPTH ${@:2}
