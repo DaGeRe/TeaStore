@@ -31,6 +31,9 @@ import tools.descartes.teastore.entities.message.SessionBlob;
  */
 @WebServlet("/loginAction")
 public class LoginActionServlet extends AbstractUIServlet {
+	
+	private static final int RECURSION_DEPTH = Integer.parseInt(System.getenv("RECURSION_DEPTH"));
+	
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -81,11 +84,27 @@ public class LoginActionServlet extends AbstractUIServlet {
 			saveSessionBlob(blob, response);
 			destroySessionBlob(blob, response);
 			redirect("/", response, MESSAGECOOKIE, SUCESSLOGOUT);
-
+			
+			// Experiment: Execute recursion to see how it affects login 
+			monitoredMethod(0, RECURSION_DEPTH);
 		} else {
 			handleGETRequest(request, response);
 		}
 
+	}
+	
+	// From MooBench
+	public final long monitoredMethod(final long methodTime, final int recDepth) {
+		if (recDepth > 1) {
+			return this.monitoredMethod(methodTime, recDepth - 1);
+		} else {
+			final long exitTime = System.nanoTime() + methodTime;
+			long currentTime;
+			do {
+				currentTime = System.nanoTime();
+			} while (currentTime < exitTime);
+			return currentTime;
+		}
 	}
 
 }

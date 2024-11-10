@@ -32,6 +32,9 @@ source executionControl/functions.sh
 if [ "$2" ]
 then
 	resetInstrumentationFiles
+	
+	RECURSION_DEPTH=$3
+	sed -i "/ENV USE_HTTPS false/a ENV RECURSION_DEPTH $RECURSION_DEPTH" utilities/tools.descartes.teastore.dockerbase/Dockerfile
 	case "$2" in
 		"NO_INSTRUMENTATION") removeAllInstrumentation ;;
 		"DEACTIVATED") 
