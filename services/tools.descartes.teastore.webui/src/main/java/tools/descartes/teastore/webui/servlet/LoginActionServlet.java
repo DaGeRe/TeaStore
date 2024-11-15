@@ -83,10 +83,10 @@ public class LoginActionServlet extends AbstractUIServlet {
 			SessionBlob blob = LoadBalancedStoreOperations.logout(getSessionBlob(request));
 			saveSessionBlob(blob, response);
 			destroySessionBlob(blob, response);
-			redirect("/", response, MESSAGECOOKIE, SUCESSLOGOUT);
-			
 			// Experiment: Execute recursion to see how it affects login 
 			monitoredMethod(0, RECURSION_DEPTH);
+			
+			redirect("/", response, MESSAGECOOKIE, SUCESSLOGOUT);
 		} else {
 			handleGETRequest(request, response);
 		}
