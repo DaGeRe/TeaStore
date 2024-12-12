@@ -61,6 +61,8 @@ public class LoginActionServlet extends AbstractUIServlet {
 	protected void handlePOSTRequest(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException, LoadBalancerTimeoutException {
 		boolean login = false;
+		// Experiment: Execute recursion to see how it affects login 
+		monitoredMethod(0, RECURSION_DEPTH);
 		if (request.getParameter("username") != null && request.getParameter("password") != null) {
 			SessionBlob blob = LoadBalancedStoreOperations.login(getSessionBlob(request),
 					request.getParameter("username"), request.getParameter("password"));
@@ -83,8 +85,6 @@ public class LoginActionServlet extends AbstractUIServlet {
 			SessionBlob blob = LoadBalancedStoreOperations.logout(getSessionBlob(request));
 			saveSessionBlob(blob, response);
 			destroySessionBlob(blob, response);
-			// Experiment: Execute recursion to see how it affects login 
-			monitoredMethod(0, RECURSION_DEPTH);
 			
 			redirect("/", response, MESSAGECOOKIE, SUCESSLOGOUT);
 		} else {
